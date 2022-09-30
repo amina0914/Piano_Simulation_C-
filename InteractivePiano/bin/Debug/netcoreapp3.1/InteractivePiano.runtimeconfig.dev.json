@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\amina\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\amina\\.nuget\\packages"
+    ]
+  }
+}
