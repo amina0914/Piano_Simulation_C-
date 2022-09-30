@@ -42,6 +42,8 @@ namespace InteractivePiano
                  Exit();
             }
 
+            // if pressed key == current state, or old state, only play key once 
+
             var pressedKeys = Keyboard.GetState().GetPressedKeys();
             foreach (Keys key in pressedKeys)
             {
