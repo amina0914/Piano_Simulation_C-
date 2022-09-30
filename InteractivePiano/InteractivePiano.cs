@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using PianoSimulation;
+using System;
 
 namespace InteractivePiano
 {
@@ -48,7 +49,10 @@ namespace InteractivePiano
             {
                 Piano piano = new Piano();
                 Audio audio = new Audio();
-                piano.StrikeKey('q');
+                char pianoKey = key.ToString().ToLower()[0];
+                System.Diagnostics.Debug.WriteLine(pianoKey);
+
+                piano.StrikeKey(pianoKey);
                 for (int j=0; j<piano.SamplingRate*3; j++)
                 {
                     audio.Play(piano.Play());
