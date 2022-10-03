@@ -41,14 +41,20 @@ namespace InteractivePiano
             _waveOut.Play();
         }
 
-        public static Audio Instance 
+        public static Audio Instance
         {
             get 
             {
+                instance.Reset();
                 return instance;
             }
         }
 
+        private void Reset()
+        {
+            _bufferCount = 0;
+            _bufferedWaveProvider.ClearBuffer();
+        }
 
         /// <summary>
         /// Used to play a double representing an audio sample. The double will be added to the buffer
@@ -144,5 +150,6 @@ namespace InteractivePiano
                 waveWriter.WriteSamples(samples,0, samples.Length);
             }
         }
+
     }
 }
