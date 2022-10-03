@@ -22,8 +22,8 @@ namespace InteractivePiano
         {
             // TODO: Add your initialization logic here
 
-            Piano piano = new Piano();
-            Audio audio = new Audio();
+            // Piano piano = new Piano();
+            // Audio audio = new Audio.Instance();
 
             base.Initialize();
         }
@@ -50,7 +50,7 @@ namespace InteractivePiano
             if (Keyboard.GetState().IsKeyDown(key))
             {
                 Piano piano = new Piano();
-                Audio audio = new Audio();
+                Audio audio = Audio.Instance;
                 char pianoKey = key.ToString().ToLower()[0];
                 System.Diagnostics.Debug.WriteLine(pianoKey);
 

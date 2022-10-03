@@ -6,8 +6,9 @@ namespace InteractivePiano
     /// <summary>
     /// This class is used to play a stream of doubles that represent audio samples
     /// </summary>
-    class Audio
+    public sealed class Audio
     {
+        private static readonly Audio instance = new Audio();
         private WaveOutEvent _waveOut;  //audio output in separate thread
         private WaveFormat _waveFormat;
         private BufferedWaveProvider _bufferedWaveProvider;  //used for streaming audio
@@ -15,12 +16,18 @@ namespace InteractivePiano
         private int _bufferCount = 0;
         private byte[] _buffer;
 
+
+
         /// <summary>
         /// Audio constructor
         /// </summary>
         /// <param name="bufferSize">Length of buffer held in this class, default is 4096</param>
         /// <param name="samplingRate">Audio sampling rate,, default value is 44100</param>
-        public Audio(int bufferSize = 4096 * 16, int samplingRate = 44100)
+        
+        static Audio()
+        {
+        }
+        private Audio(int bufferSize = 4096 * 16, int samplingRate = 44100)
         {
             _waveOut = new WaveOutEvent();
             _waveFormat = new WaveFormat(samplingRate, 16, 1);
@@ -33,6 +40,15 @@ namespace InteractivePiano
             _waveOut.Init(_bufferedWaveProvider);
             _waveOut.Play();
         }
+
+        public static Audio Instance 
+        {
+            get 
+            {
+                return instance;
+            }
+        }
+
 
         /// <summary>
         /// Used to play a double representing an audio sample. The double will be added to the buffer
