@@ -6,7 +6,7 @@ namespace InteractivePiano
     /// <summary>
     /// This class is used to play a stream of doubles that represent audio samples
     /// </summary>
-    public sealed class Audio
+    public sealed class Audio : IDisposable
     {
         private static readonly Audio instance = new Audio();
         private WaveOutEvent _waveOut;  //audio output in separate thread
@@ -45,7 +45,7 @@ namespace InteractivePiano
         {
             get 
             {
-                instance.Reset();
+                instance.Reset(); // * not sure when to call reset
                 return instance;
             }
         }
@@ -54,6 +54,16 @@ namespace InteractivePiano
         {
             _bufferCount = 0;
             _bufferedWaveProvider.ClearBuffer();
+        }
+
+
+        public void Dispose()
+        {
+            instance.Reset();   // * not sure if reset goes here 
+           _bufferedWaveProvider = null;
+           _waveOut.Stop();
+           _waveOut = null;
+           instance.Dispose();  // * not sure about this
         }
 
         /// <summary>
