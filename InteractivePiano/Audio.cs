@@ -45,12 +45,12 @@ namespace InteractivePiano
         {
             get 
             {
-                instance.Reset(); // * not sure when to call reset
+                // instance.Reset(); // * not sure when to call reset
                 return instance;
             }
         }
 
-        private void Reset()
+        public void Reset()
         {
             _bufferCount = 0;
             _bufferedWaveProvider.ClearBuffer();
@@ -59,11 +59,11 @@ namespace InteractivePiano
 
         public void Dispose()
         {
-            instance.Reset();   // * not sure if reset goes here 
+            // instance.Reset();   // * not sure if reset goes here 
            _bufferedWaveProvider = null;
            _waveOut.Stop();
            _waveOut = null;
-           instance.Dispose();  // * not sure about this
+        //    instance.Dispose();  // * not sure about this
         }
 
         /// <summary>

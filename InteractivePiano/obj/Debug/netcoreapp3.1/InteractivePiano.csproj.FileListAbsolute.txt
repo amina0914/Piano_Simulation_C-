@@ -117,3 +117,5 @@ C:\Users\amina\Documents\CompSci\Prog5\assignment2_prog5\InteractivePiano\bin\De
 C:\Users\amina\Documents\CompSci\Prog5\assignment2_prog5\InteractivePiano\bin\Debug\netcoreapp3.1\PianoSimulationTests.dll
 C:\Users\amina\Documents\CompSci\Prog5\assignment2_prog5\InteractivePiano\bin\Debug\netcoreapp3.1\PianoSimulation.pdb
 C:\Users\amina\Documents\CompSci\Prog5\assignment2_prog5\InteractivePiano\bin\Debug\netcoreapp3.1\PianoSimulationTests.pdb
+C:\Users\amina\Documents\CompSci\Prog5\assignment2_prog5\InteractivePiano\bin\Debug\netcoreapp3.1\Content\blackKey.xnb
+C:\Users\amina\Documents\CompSci\Prog5\assignment2_prog5\InteractivePiano\bin\Debug\netcoreapp3.1\Content\whiteKey.xnb
