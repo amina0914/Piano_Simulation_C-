@@ -11,7 +11,9 @@ namespace InteractivePiano
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        private Texture2D background;
+        private Texture2D texture;
+        private Texture2D texture2;
+
 
         public InteractivePiano()
         {
@@ -34,7 +36,8 @@ namespace InteractivePiano
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            background = Content.Load<Texture2D>("blackKey");
+            texture = Content.Load<Texture2D>("whiteRectangle");
+            texture2 = Content.Load<Texture2D>("blackKey");
             // TODO: use this.Content to load your game content here
 
         }
@@ -56,7 +59,6 @@ namespace InteractivePiano
                 char pianoKey = key.ToString().ToLower()[0];
                 System.Diagnostics.Debug.WriteLine(pianoKey);
                 piano.StrikeKey(pianoKey); 
-
                 // using (Audio audio = Audio.Instance){
 
 
@@ -76,13 +78,57 @@ namespace InteractivePiano
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
+            _graphics.PreferredBackBufferWidth = 1540; 
+            _graphics.PreferredBackBufferHeight = 500;
+            _graphics.ApplyChanges();
+
+            GraphicsDevice.Clear(Color.Orange);
+
             _spriteBatch.Begin();
- 
-            _spriteBatch.Draw(background, new Rectangle(0, 0, 800, 480), Color.Orange);
- 
+            _spriteBatch.Draw(texture, new Rectangle(0, 0, 70, 220), Color.White);
+            _spriteBatch.Draw(texture, new Rectangle(70, 0, 70, 220), Color.White);
+            _spriteBatch.Draw(texture, new Rectangle(140, 0, 70, 220), Color.White);
+            _spriteBatch.Draw(texture, new Rectangle(210, 0, 70, 220), Color.White);
+            _spriteBatch.Draw(texture, new Rectangle(280, 0, 70, 220), Color.White);
+            _spriteBatch.Draw(texture, new Rectangle(350, 0, 70, 220), Color.White);
+            _spriteBatch.Draw(texture, new Rectangle(420, 0, 70, 220), Color.White);
+            _spriteBatch.Draw(texture, new Rectangle(490, 0, 70, 220), Color.White);
+            _spriteBatch.Draw(texture, new Rectangle(560, 0, 70, 220), Color.White);
+            _spriteBatch.Draw(texture, new Rectangle(630, 0, 70, 220), Color.White);
+            _spriteBatch.Draw(texture, new Rectangle(700, 0, 70, 220), Color.White);
+            _spriteBatch.Draw(texture, new Rectangle(770, 0, 70, 220), Color.White);
+            _spriteBatch.Draw(texture, new Rectangle(840, 0, 70, 220), Color.White);
+            _spriteBatch.Draw(texture, new Rectangle(910, 0, 70, 220), Color.White);
+            _spriteBatch.Draw(texture, new Rectangle(980, 0, 70, 220), Color.White);
+            _spriteBatch.Draw(texture, new Rectangle(1050, 0, 70, 220), Color.White);
+            _spriteBatch.Draw(texture, new Rectangle(1120, 0, 70, 220), Color.White);
+            _spriteBatch.Draw(texture, new Rectangle(1190, 0, 70, 220), Color.White);
+            _spriteBatch.Draw(texture, new Rectangle(1190, 0, 70, 220), Color.White);
+            _spriteBatch.Draw(texture, new Rectangle(1260, 0, 70, 220), Color.White);
+            _spriteBatch.Draw(texture, new Rectangle(1330, 0, 70, 220), Color.White);
+            _spriteBatch.Draw(texture, new Rectangle(1400, 0, 70, 220), Color.White);
+            _spriteBatch.Draw(texture, new Rectangle(1470, 0, 70, 220), Color.White);
+
+            _spriteBatch.Draw(texture2, new Rectangle(50, 0, 40, 120), Color.Black);
+            _spriteBatch.Draw(texture2, new Rectangle(190, 0, 40, 120), Color.Black);
+            _spriteBatch.Draw(texture2, new Rectangle(260, 0, 40, 120), Color.Black);
+            _spriteBatch.Draw(texture2, new Rectangle(400, 0, 40, 120), Color.Black);
+            _spriteBatch.Draw(texture2, new Rectangle(470, 0, 40, 120), Color.Black);
+            _spriteBatch.Draw(texture2, new Rectangle(540, 0, 40, 120), Color.Black);
+            _spriteBatch.Draw(texture2, new Rectangle(680, 0, 40, 120), Color.Black);
+            _spriteBatch.Draw(texture2, new Rectangle(750, 0, 40, 120), Color.Black);
+            _spriteBatch.Draw(texture2, new Rectangle(890, 0, 40, 120), Color.Black);
+            _spriteBatch.Draw(texture2, new Rectangle(960, 0, 40, 120), Color.Black);
+            _spriteBatch.Draw(texture2, new Rectangle(1030, 0, 40, 120), Color.Black);
+            _spriteBatch.Draw(texture2, new Rectangle(1170, 0, 40, 120), Color.Black);
+            _spriteBatch.Draw(texture2, new Rectangle(1240, 0, 40, 120), Color.Black);
+            _spriteBatch.Draw(texture2, new Rectangle(1380, 0, 40, 120), Color.Black);
+            _spriteBatch.Draw(texture2, new Rectangle(1450, 0, 40, 120), Color.Black);
+
+
+
+            
             _spriteBatch.End();
 
             base.Draw(gameTime);
