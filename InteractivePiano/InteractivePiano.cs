@@ -10,6 +10,8 @@ namespace InteractivePiano
 {
     public class InteractivePiano : Game
     {
+        KeyboardState currentKeyState;
+        KeyboardState previousKeyState;
         public GraphicsDeviceManager graphics;
         public SpriteBatch spriteBatch;
 
@@ -37,41 +39,7 @@ namespace InteractivePiano
         {        
             graphics.PreferredBackBufferWidth = 1540; 
             graphics.PreferredBackBufferHeight = 500;
-            graphics.ApplyChanges();
-
-            // int whitePosX=0;
-            // int whitePosY=0;
-            // int whiteSizeX=70;
-            // int whiteSizeY=220;
-            // Color colorWhite=Color.White;
-            // String[] letters = {"A", "B", "C", "D", "E", "F", "G"};
-            // whiteKeys = new List<KeysPiano>();
-            // for (int i=0; i<22; i++)
-            // {
-            //     KeysPiano keysPiano = new KeysPiano(this, whitePosX, whitePosY, whiteSizeX, whiteSizeY, colorWhite, letters[i%letters.Length]);
-            //     whiteKeys.Add(keysPiano);
-            //     Components.Add(keysPiano);
-            //     whitePosX = whitePosX + 70;
-            // }
-            // int blackPosX=50;
-            // int blackPosY=0;
-            // int blackSizeX=40;
-            // int blackSizeY=120;
-            // Color colorBlack=Color.Black;
-            // String[] lettersSharp = {"A#", "B#", "C#", "D#", "E#", "F#", "G#"};
-            // blackKeys = new List<KeysPiano>(); 
-            // for (int j=0; j<15; j++){
-            //     KeysPiano keysPiano = new KeysPiano(this, blackPosX, blackPosY, blackSizeX, blackSizeY, colorBlack,lettersSharp[j%lettersSharp.Length]);
-            //     Components.Add(keysPiano);
-            //     if (j==0 || j==2 || j== 5 || j==7 || j==10 || j==12)
-            //     {
-            //         blackPosX = blackPosX + 140;
-            //     }
-            //     else {
-            //         blackPosX = blackPosX + 70;
-            //     }
-
-            // }       
+            graphics.ApplyChanges();      
 
                 int whitePosX=0;
                 int whitePosY=0;
@@ -93,49 +61,44 @@ namespace InteractivePiano
                 lettersAssociated[a] = letters[a%letters.Length];
             }
 
-                // create in order but push to array in the order of the keys
-
-                whiteKeys = new List<KeysPiano>();
-                for (int i=0; i<22; i++)
+            whiteKeys = new List<KeysPiano>();
+            for (int i=0; i<22; i++)
+            {
+                KeysPiano keysPiano = new KeysPiano(this, whitePosX, whitePosY, whiteSizeX, whiteSizeY, colorWhite);
+                whiteKeys.Add(keysPiano);
+                Components.Add(keysPiano);
+                whitePosX = whitePosX + 70;
+            }
+            blackKeys = new List<KeysPiano>(); 
+            for (int j=0; j<15; j++){
+                KeysPiano keysPiano = new KeysPiano(this, blackPosX, blackPosY, blackSizeX, blackSizeY, colorBlack);
+                Components.Add(keysPiano);
+                if (j==0 || j==2 || j== 5 || j==7 || j==10 || j==12)
                 {
-                    KeysPiano keysPiano = new KeysPiano(this, whitePosX, whitePosY, whiteSizeX, whiteSizeY, colorWhite);
-                    whiteKeys.Add(keysPiano);
-                    Components.Add(keysPiano);
-                    whitePosX = whitePosX + 70;
+                    blackPosX = blackPosX + 140;
                 }
-                blackKeys = new List<KeysPiano>(); 
-                for (int j=0; j<15; j++){
-                    KeysPiano keysPiano = new KeysPiano(this, blackPosX, blackPosY, blackSizeX, blackSizeY, colorBlack);
-                    Components.Add(keysPiano);
-                    if (j==0 || j==2 || j== 5 || j==7 || j==10 || j==12)
-                    {
-                        blackPosX = blackPosX + 140;
-                    }
-                    else {
-                        blackPosX = blackPosX + 70;
-                    }
-                    blackKeys.Add(keysPiano);
+                else 
+                {
+                    blackPosX = blackPosX + 70;
+                }
+                blackKeys.Add(keysPiano);
                 }    
             allKeys = new KeysPiano[piano.Keys.Length];   
             int indexBlack = 0 ;
             int indexWhite = 0;
             for (int b=0; b<piano.Keys.Length; b++){
-            Console.WriteLine("index white " + indexWhite);
-            Console.WriteLine("index black " + indexBlack);
 
-                if(b%12==1 || b%12==4 || b%12==6 || b%12==9 || b%12==11){
+                if(b%12==1 || b%12==4 || b%12==6 || b%12==9 || b%12==11)
+                {
                     allKeys[b] = blackKeys[indexBlack];
                     indexBlack++;
-                    // push black key
-                    // take base 12, figure pattern if black or white with ifs %
                 }
-                else {
-                    //push white keys
+                else 
+                {
                     allKeys[b] = whiteKeys[indexWhite];
                     indexWhite++;
                 }
             }
-
             base.Initialize();
         }
 
@@ -145,34 +108,45 @@ namespace InteractivePiano
             texture = Content.Load<Texture2D>("whiteRectangle");
             texture2 = Content.Load<Texture2D>("blackKey");
 
+            currentKeyState = Microsoft.Xna.Framework.Input.Keyboard.GetState();
+            previousKeyState = currentKeyState;
+
         }
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape)) {
+            foreach(var key in whiteKeys)
+            {
+                key.color = Color.White;
+            }
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape)) 
+            {
                  Exit();
             }
+            previousKeyState = currentKeyState;
+            currentKeyState = Microsoft.Xna.Framework.Input.Keyboard.GetState();
+            // if pressed key == current state, or old state, only play key once      
 
-            // if pressed key == current state, or old state, only play key once 
-
+            List<Keys> allPressedKeys=new List <Keys>();
+            int index=0;
             var pressedKeys = Keyboard.GetState().GetPressedKeys();
             foreach (Keys key in pressedKeys)
             {
+                allPressedKeys.Add(key);
                 if (Keyboard.GetState().IsKeyDown(key))
                 {
                     char pianoKey = key.ToString().ToLower()[0];
 
                     // if piano frequency is modulo of 110, call A
-                    int index = piano.Keys.IndexOf(pianoKey);
+                    index = piano.Keys.IndexOf(pianoKey);
                     
                     allKeys[index].color = Color.Gray ;
     
-              // put task for stike key (strike and play)
+                    // put task for stike key (strike and play)
 
-                System.Diagnostics.Debug.WriteLine(pianoKey);
-                piano.StrikeKey(pianoKey); 
-                // using (Audio audio = Audio.Instance){
-
+                    System.Diagnostics.Debug.WriteLine(pianoKey);
+                    piano.StrikeKey(pianoKey); 
+                    // using (Audio audio = Audio.Instance){
 
                     Audio audio = Audio.Instance; 
                     audio.Reset();     //not sure when to call reset  
@@ -182,8 +156,30 @@ namespace InteractivePiano
                     }
 
                 }
+                // if (Keyboard.GetState().IsKeyUp(key))
+                // {
+                //     allKeys[index].color = Color.Yellow ;
+                // }
 
-            }   
+            }
+
+
+            //Here turning back to white, for now yellow for testing purposes
+
+            // foreach (Keys pressedKey in allPressedKeys)
+            // {
+            //     // if (Keyboard.GetState().IsKeyUp(pressedKey)){
+            //         if (previousKeyState.IsKeyDown(pressedKey) && currentKeyState.IsKeyDown(pressedKey) ){
+            //             Console.WriteLine("true");
+            //             index = piano.Keys.IndexOf(pressedKey.ToString().ToLower()[0]);
+            //             allKeys[index].color = Color.Yellow ;
+            //     }   
+                // Console.WriteLine("false");
+
+                // allKeys[index].color = Color.Yellow;
+
+
+            //}
 
             base.Update(gameTime);
         }
