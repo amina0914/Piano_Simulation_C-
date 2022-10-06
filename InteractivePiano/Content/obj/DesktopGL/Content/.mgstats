@@ -1,1 +1,4 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"c:/Users/amina/Documents/CompSci/Prog5/assignment2_prog5/InteractivePiano/Content/blackKey.png","c:/Users/amina/Documents/CompSci/Prog5/assignment2_prog5/InteractivePiano/Content/bin/DesktopGL/Content/blackKey.xnb","TextureProcessor","Texture2DContent",4528,2986069,0,2457489
+"c:/Users/amina/Documents/CompSci/Prog5/assignment2_prog5/InteractivePiano/Content/whiteKey.png","c:/Users/amina/Documents/CompSci/Prog5/assignment2_prog5/InteractivePiano/Content/bin/DesktopGL/Content/whiteKey.xnb","TextureProcessor","Texture2DContent",1879,732533,0,0312758
+"c:/Users/amina/Documents/CompSci/Prog5/assignment2_prog5/InteractivePiano/Content/whiteRectangle.png","c:/Users/amina/Documents/CompSci/Prog5/assignment2_prog5/InteractivePiano/Content/bin/DesktopGL/Content/whiteRectangle.xnb","TextureProcessor","Texture2DContent",10136,640057,0,0431404

@@ -8,7 +8,7 @@ namespace InteractivePiano
 {
     public class KeysPiano : DrawableGameComponent
     {
-        private InteractivePiano InteractivePiano;
+        private InteractivePiano interactivePiano;
         private int posX;
         private int posY;
 
@@ -19,15 +19,14 @@ namespace InteractivePiano
 
         public String letter;
 
-        public KeysPiano(InteractivePiano piano, int posX, int posY, int sizeX, int sizeY, Color color, String letter): base(piano)
+        public KeysPiano(InteractivePiano piano, int posX, int posY, int sizeX, int sizeY, Color color): base(piano)
         {
-           this.InteractivePiano = piano;
+           this.interactivePiano = piano;
            this.posX = posX;
            this.posY = posY;
            this.sizeX = sizeX;
            this.sizeY = sizeY;
            this.color = color;
-           this.letter = letter;
         }
 
         public override void Initialize()
@@ -46,9 +45,9 @@ namespace InteractivePiano
 
         public override void Draw(GameTime gameTime)
         {
-            InteractivePiano.spriteBatch.Begin();
-            InteractivePiano.spriteBatch.Draw(InteractivePiano.texture, new Rectangle(posX, posY, sizeX, sizeY), color);
-            InteractivePiano.spriteBatch.End();
+            interactivePiano.spriteBatch.Begin();
+            interactivePiano.spriteBatch.Draw(interactivePiano.texture, new Rectangle(posX, posY, sizeX, sizeY), color);
+            interactivePiano.spriteBatch.End();
             base.Draw(gameTime);
         }
     }
