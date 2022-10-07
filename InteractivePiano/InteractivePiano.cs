@@ -120,86 +120,63 @@ namespace InteractivePiano
         }
 
         protected override void Update(GameTime gameTime)
-        {    
-            foreach (KeysPiano pKey in whiteKeys){
-                pKey.isDown=false;
-      
-            }
-            
+        {              
             previousKeyState = currentKeyState;
             currentKeyState = Microsoft.Xna.Framework.Input.Keyboard.GetState();
 
+
             int index=0;
             var pressedKeys = Keyboard.GetState().GetPressedKeys();
+
+   
             
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape)) 
             {
                  Exit();
             }
-
-            // foreach (KeysPiano pKey in whiteKeys){
-            //     pKey.isDown=false;
-      
-            // }
-           
-
-            if(currentKeyState != previousKeyState) {
                 
                 foreach (Keys key in pressedKeys)
                 {
-               //     if (Keyboard.GetState().IsKeyDown(key)){
-                    // if (currentKeyState != previousKeyState)
+                   
+                    if (currentKeyState.IsKeyDown(key) && previousKeyState.IsKeyUp(key)){
 
-                    // {
                         
                         char pianoKey = key.ToString().ToLower()[0];
-
-                        // if piano frequency is modulo of 110, call A
-                        index = piano.Keys.IndexOf(pianoKey);
-                        
+                        index = piano.Keys.IndexOf(pianoKey); 
                         allKeys[index].isDown = true;
-
-        
-                        // put task for stike key (strike and play)
 
                         System.Diagnostics.Debug.WriteLine(pianoKey);
                         Task t;
                         t = new Task(() => {
-                            // () => {
                             Audio.Reset();
-
                             piano.StrikeKey(pianoKey); 
-                            // using (Audio audio = Audio.Instance){
-
                             for (int j=0; j<piano.SamplingRate*3; j++)
                             {
                                 audio.Play(piano.Play());
                             }
                             });
-                        // );
                         t.Start();
                         t.Wait();
-                    }
-            //    }
-                    // index = piano.Keys.IndexOf(pianoKey);
-           
-                        
-                }
-
-        //    }
-            // else {
+                    } 
                
-            // }
 
-            // while (currentKeyState == previousKeyState){
-            //     Console.WriteLine("in while");
-                // foreach(var pKey in whiteKeys)
-                // {
-                //     pKey.isDown = false;
-                // }
-            // }
+                }     
 
-          
+
+               
+
+                int index2;
+                for (int a=0; a<allKeys.Length; a++){
+                    allKeys[a].isDown=false;
+                     for (int i=0; i<pressedKeys.Length; i++)
+                    {
+                        char pianoKey = pressedKeys[i].ToString().ToLower()[0];
+                        index2 = piano.Keys.IndexOf(pianoKey); 
+                        allKeys[index2].isDown = true;
+
+                    } 
+      
+                }   
             base.Update(gameTime);
         }
 

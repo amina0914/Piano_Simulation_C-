@@ -9,7 +9,7 @@ namespace InteractivePiano
     public class KeysPiano : DrawableGameComponent
     {
         private InteractivePiano interactivePiano;
-        private int posX;
+        public int posX;
         private int posY;
 
         private int sizeX;
