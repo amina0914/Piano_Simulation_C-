@@ -17,8 +17,9 @@ namespace InteractivePiano
 
         public Color color{get; set;}
 
-        public String letter;
         
+
+        public String letter{get; set;}
         public bool isDown{get; set;}
 
         public KeysPiano(InteractivePiano piano, int posX, int posY, int sizeX, int sizeY, Color color): base(piano)
@@ -51,6 +52,9 @@ namespace InteractivePiano
             interactivePiano.spriteBatch.Begin();
             if (isDown){
                 interactivePiano.spriteBatch.Draw(interactivePiano.texture, new Rectangle(posX, posY, sizeX, sizeY), Color.Gray);
+                 
+                interactivePiano.spriteBatch.DrawString(interactivePiano.font, letter, new Vector2(posX+22, 250), Color.Black);  
+            
             }
             else {
                 interactivePiano.spriteBatch.Draw(interactivePiano.texture, new Rectangle(posX, posY, sizeX, sizeY), color);

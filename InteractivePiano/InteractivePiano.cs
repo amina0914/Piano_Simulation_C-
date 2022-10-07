@@ -28,6 +28,10 @@ namespace InteractivePiano
 
         Audio audio;
 
+        public SpriteFont font;
+
+        String[] lettersAssociated;
+
 
         public InteractivePiano(Audio audio)
         {
@@ -56,7 +60,7 @@ namespace InteractivePiano
                 int blackSizeY=120;
                 Color colorBlack=Color.Black;
 
-            String[] lettersAssociated = new String[piano.Keys.Length];
+            lettersAssociated = new String[piano.Keys.Length];
             String[] letters = {"A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"};
 
                 
@@ -114,10 +118,10 @@ namespace InteractivePiano
 
             currentKeyState = Microsoft.Xna.Framework.Input.Keyboard.GetState();
             previousKeyState = currentKeyState;
+            
+            font = Content.Load<SpriteFont>("Letter");
 
-             
-
-        }
+        }   
 
         protected override void Update(GameTime gameTime)
         {              
@@ -140,10 +144,13 @@ namespace InteractivePiano
                    
                     if (currentKeyState.IsKeyDown(key) && previousKeyState.IsKeyUp(key)){
 
+                       
                         
                         char pianoKey = key.ToString().ToLower()[0];
                         index = piano.Keys.IndexOf(pianoKey); 
+                        allKeys[index].letter = lettersAssociated[index];
                         allKeys[index].isDown = true;
+
 
                         System.Diagnostics.Debug.WriteLine(pianoKey);
                         Task t;
@@ -159,11 +166,7 @@ namespace InteractivePiano
                         t.Wait();
                     } 
                
-
                 }     
-
-
-               
 
                 int index2;
                 for (int a=0; a<allKeys.Length; a++){
@@ -182,7 +185,7 @@ namespace InteractivePiano
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Orange);
+            GraphicsDevice.Clear(Color.Orange);     
 
             base.Draw(gameTime);
         }
