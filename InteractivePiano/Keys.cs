@@ -18,6 +18,8 @@ namespace InteractivePiano
         public Color color{get; set;}
 
         public String letter;
+        
+        public bool isDown{get; set;}
 
         public KeysPiano(InteractivePiano piano, int posX, int posY, int sizeX, int sizeY, Color color): base(piano)
         {
@@ -27,6 +29,7 @@ namespace InteractivePiano
            this.sizeX = sizeX;
            this.sizeY = sizeY;
            this.color = color;
+           isDown=false;
         }
 
         public override void Initialize()
@@ -46,7 +49,12 @@ namespace InteractivePiano
         public override void Draw(GameTime gameTime)
         {
             interactivePiano.spriteBatch.Begin();
-            interactivePiano.spriteBatch.Draw(interactivePiano.texture, new Rectangle(posX, posY, sizeX, sizeY), color);
+            if (isDown){
+                interactivePiano.spriteBatch.Draw(interactivePiano.texture, new Rectangle(posX, posY, sizeX, sizeY), Color.Gray);
+            }
+            else {
+                interactivePiano.spriteBatch.Draw(interactivePiano.texture, new Rectangle(posX, posY, sizeX, sizeY), color);
+            }
             interactivePiano.spriteBatch.End();
             base.Draw(gameTime);
         }

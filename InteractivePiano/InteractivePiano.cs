@@ -5,6 +5,7 @@ using PianoSimulation;
 using System.Collections.Generic;
 using System;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace InteractivePiano
 {
@@ -25,13 +26,15 @@ namespace InteractivePiano
 
         KeysPiano[] allKeys;
 
+        Audio audio;
 
 
-        public InteractivePiano()
+        public InteractivePiano(Audio audio)
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+            this.audio=audio;
 
         }
 
@@ -70,7 +73,8 @@ namespace InteractivePiano
                 whitePosX = whitePosX + 70;
             }
             blackKeys = new List<KeysPiano>(); 
-            for (int j=0; j<15; j++){
+            for (int j=0; j<15; j++)
+            {
                 KeysPiano keysPiano = new KeysPiano(this, blackPosX, blackPosY, blackSizeX, blackSizeY, colorBlack);
                 Components.Add(keysPiano);
                 if (j==0 || j==2 || j== 5 || j==7 || j==10 || j==12)
@@ -82,7 +86,7 @@ namespace InteractivePiano
                     blackPosX = blackPosX + 70;
                 }
                 blackKeys.Add(keysPiano);
-                }    
+            }    
             allKeys = new KeysPiano[piano.Keys.Length];   
             int indexBlack = 0 ;
             int indexWhite = 0;
@@ -111,76 +115,91 @@ namespace InteractivePiano
             currentKeyState = Microsoft.Xna.Framework.Input.Keyboard.GetState();
             previousKeyState = currentKeyState;
 
+             
+
         }
 
         protected override void Update(GameTime gameTime)
-        {
-            foreach(var key in whiteKeys)
-            {
-                key.color = Color.White;
+        {    
+            foreach (KeysPiano pKey in whiteKeys){
+                pKey.isDown=false;
+      
             }
+            
+            previousKeyState = currentKeyState;
+            currentKeyState = Microsoft.Xna.Framework.Input.Keyboard.GetState();
+
+            int index=0;
+            var pressedKeys = Keyboard.GetState().GetPressedKeys();
+            
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape)) 
             {
                  Exit();
             }
-            previousKeyState = currentKeyState;
-            currentKeyState = Microsoft.Xna.Framework.Input.Keyboard.GetState();
-            // if pressed key == current state, or old state, only play key once      
 
-            List<Keys> allPressedKeys=new List <Keys>();
-            int index=0;
-            var pressedKeys = Keyboard.GetState().GetPressedKeys();
-            foreach (Keys key in pressedKeys)
-            {
-                allPressedKeys.Add(key);
-                if (Keyboard.GetState().IsKeyDown(key))
+            // foreach (KeysPiano pKey in whiteKeys){
+            //     pKey.isDown=false;
+      
+            // }
+           
+
+            if(currentKeyState != previousKeyState) {
+                
+                foreach (Keys key in pressedKeys)
                 {
-                    char pianoKey = key.ToString().ToLower()[0];
+               //     if (Keyboard.GetState().IsKeyDown(key)){
+                    // if (currentKeyState != previousKeyState)
 
-                    // if piano frequency is modulo of 110, call A
-                    index = piano.Keys.IndexOf(pianoKey);
-                    
-                    allKeys[index].color = Color.Gray ;
-    
-                    // put task for stike key (strike and play)
+                    // {
+                        
+                        char pianoKey = key.ToString().ToLower()[0];
 
-                    System.Diagnostics.Debug.WriteLine(pianoKey);
-                    piano.StrikeKey(pianoKey); 
-                    // using (Audio audio = Audio.Instance){
+                        // if piano frequency is modulo of 110, call A
+                        index = piano.Keys.IndexOf(pianoKey);
+                        
+                        allKeys[index].isDown = true;
 
-                    Audio audio = Audio.Instance; 
-                    audio.Reset();     //not sure when to call reset  
-                    for (int j=0; j<piano.SamplingRate*3; j++)
-                    {
-                        audio.Play(piano.Play());
+        
+                        // put task for stike key (strike and play)
+
+                        System.Diagnostics.Debug.WriteLine(pianoKey);
+                        Task t;
+                        t = new Task(() => {
+                            // () => {
+                            Audio.Reset();
+
+                            piano.StrikeKey(pianoKey); 
+                            // using (Audio audio = Audio.Instance){
+
+                            for (int j=0; j<piano.SamplingRate*3; j++)
+                            {
+                                audio.Play(piano.Play());
+                            }
+                            });
+                        // );
+                        t.Start();
+                        t.Wait();
                     }
-
+            //    }
+                    // index = piano.Keys.IndexOf(pianoKey);
+           
+                        
                 }
-                // if (Keyboard.GetState().IsKeyUp(key))
+
+        //    }
+            // else {
+               
+            // }
+
+            // while (currentKeyState == previousKeyState){
+            //     Console.WriteLine("in while");
+                // foreach(var pKey in whiteKeys)
                 // {
-                //     allKeys[index].color = Color.Yellow ;
+                //     pKey.isDown = false;
                 // }
+            // }
 
-            }
-
-
-            //Here turning back to white, for now yellow for testing purposes
-
-            // foreach (Keys pressedKey in allPressedKeys)
-            // {
-            //     // if (Keyboard.GetState().IsKeyUp(pressedKey)){
-            //         if (previousKeyState.IsKeyDown(pressedKey) && currentKeyState.IsKeyDown(pressedKey) ){
-            //             Console.WriteLine("true");
-            //             index = piano.Keys.IndexOf(pressedKey.ToString().ToLower()[0]);
-            //             allKeys[index].color = Color.Yellow ;
-            //     }   
-                // Console.WriteLine("false");
-
-                // allKeys[index].color = Color.Yellow;
-
-
-            //}
-
+          
             base.Update(gameTime);
         }
 

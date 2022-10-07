@@ -8,9 +8,11 @@ namespace InteractivePiano
         [STAThread]
         static void Main()
         {
-            using (var game = new InteractivePiano())
-                game.Run();
-
+            using (var audio = Audio.Instance)
+            {        
+                using (var game = new InteractivePiano(audio))
+                    game.Run();
+                }
         }
     }
 }

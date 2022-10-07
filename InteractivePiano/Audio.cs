@@ -8,7 +8,9 @@ namespace InteractivePiano
     /// </summary>
     public sealed class Audio : IDisposable
     {
-        private static readonly Audio instance = new Audio();
+        private static object _lockObject = new Object();
+        private static object _lockObjectConstruction = new Object();
+        private static Audio instance = null;
         private WaveOutEvent _waveOut;  //audio output in separate thread
         private WaveFormat _waveFormat;
         private BufferedWaveProvider _bufferedWaveProvider;  //used for streaming audio
@@ -24,9 +26,9 @@ namespace InteractivePiano
         /// <param name="bufferSize">Length of buffer held in this class, default is 4096</param>
         /// <param name="samplingRate">Audio sampling rate,, default value is 44100</param>
         
-        static Audio()
-        {
-        }
+        // Audio()
+        // {
+        // }
         private Audio(int bufferSize = 4096 * 16, int samplingRate = 44100)
         {
             _waveOut = new WaveOutEvent();
@@ -45,24 +47,31 @@ namespace InteractivePiano
         {
             get 
             {
+                lock(_lockObjectConstruction) 
+                {
+                    instance = new Audio();
+                }
                 // instance.Reset(); // * not sure when to call reset
                 return instance;
             }
         }
 
-        public void Reset()
+        public static void Reset()
         {
-            _bufferCount = 0;
-            _bufferedWaveProvider.ClearBuffer();
+            instance._bufferCount = 0;
+            instance._bufferedWaveProvider.ClearBuffer();
         }
 
 
         public void Dispose()
         {
+            Reset();
+             _waveOut.Dispose();
             // instance.Reset();   // * not sure if reset goes here 
-           _bufferedWaveProvider = null;
+        //    _bufferedWaveProvider = null;
            _waveOut.Stop();
            _waveOut = null;
+           instance =null;
         //    instance.Dispose();  // * not sure about this
         }
 
@@ -72,19 +81,20 @@ namespace InteractivePiano
         /// <param name="input">Sample to be played</param>
         public void Play(double input)
         {
-            // clip if outside [-1, +1]
-            short s = ConvertToShort(input);
-            byte[] temp = BitConverter.GetBytes(s);
-            _buffer[_bufferCount++] = temp[0];
-            _buffer[_bufferCount++] = temp[1]; //little Endian
+            lock (_lockObject) {
+                // clip if outside [-1, +1]
+                short s = ConvertToShort(input);
+                byte[] temp = BitConverter.GetBytes(s);
+                _buffer[_bufferCount++] = temp[0];
+                _buffer[_bufferCount++] = temp[1]; //little Endian
 
-            // send to sound card if buffer is full        
-            if (_bufferCount >= _buffer.Length)
-            {
-                _bufferCount = 0;
-                _bufferedWaveProvider.AddSamples(_buffer, 0, _buffer.Length);
+                // send to sound card if buffer is full        
+                if (_bufferCount >= _buffer.Length)
+                {
+                    _bufferCount = 0;
+                    _bufferedWaveProvider.AddSamples(_buffer, 0, _buffer.Length);
+                }
             }
-
         }
 
         /// <summary>
