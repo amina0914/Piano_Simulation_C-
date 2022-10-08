@@ -211,17 +211,17 @@ namespace InteractivePiano
                 keyToStrike='\'';
             }else if (key == Keys.Space){
                 keyToStrike=' ';
-            }else if (key == Keys.D2){
+            }else if (key == Keys.D2 || key == Keys.NumPad2){
                 keyToStrike='2';
-            }else if (key == Keys.D4){
+            }else if (key == Keys.D4 || key == Keys.NumPad4){
                 keyToStrike='4';
-            }else if (key == Keys.D5){
+            }else if (key == Keys.D5 || key == Keys.NumPad5){
                 keyToStrike='5';
-            }else if (key == Keys.D7){
+            }else if (key == Keys.D7 || key == Keys.NumPad7){
                 keyToStrike='7';
-            }else if (key == Keys.D8){
+            }else if (key == Keys.D8 || key == Keys.NumPad8){
                 keyToStrike='8';
-            }else if (key == Keys.D9){
+            }else if (key == Keys.D9 || key == Keys.NumPad9){
                 keyToStrike='9';
             } else {
                 keyToStrike = key.ToString().ToLower()[0];;
