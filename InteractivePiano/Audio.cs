@@ -10,7 +10,7 @@ namespace InteractivePiano
     {
         private static object _lockObject = new Object();
         private static object _lockObjectConstruction = new Object();
-        private static Audio instance = null;
+        private static Audio _instance = null;
         private WaveOutEvent _waveOut;  //audio output in separate thread
         private WaveFormat _waveFormat;
         private BufferedWaveProvider _bufferedWaveProvider;  //used for streaming audio
@@ -49,31 +49,28 @@ namespace InteractivePiano
             {
                 lock(_lockObjectConstruction) 
                 {
-                    instance = new Audio();
-                return instance;
-                    
+                    _instance = new Audio();
+                    return _instance;                 
                 }
-                // instance.Reset(); // * not sure when to call reset
             }
         }
 
+        // This is the reset method that clears the buffer allowing a new sound to be played
         public static void Reset()
         {
-            instance._bufferCount = 0;
-            instance._bufferedWaveProvider.ClearBuffer();
+            _instance._bufferCount = 0;
+            _instance._bufferedWaveProvider.ClearBuffer();
         }
 
-
+        // This is the method that clears the audio and disposes of all the unmanaged ressources
         public void Dispose()
         {
             Reset();
-             _waveOut.Dispose();
-            // instance.Reset();   // * not sure if reset goes here 
-        //    _bufferedWaveProvider = null;
-           _waveOut.Stop();
-           _waveOut = null;
-           instance =null;
-        //    instance.Dispose();  // * not sure about this
+            _instance._bufferedWaveProvider = null;
+            _instance._waveOut.Dispose();       
+            _instance._waveOut.Stop();
+            _instance._waveOut = null;
+            _instance = null;
         }
 
         /// <summary>

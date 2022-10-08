@@ -1,1 +1,5 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"C:/Users/amina/Documents/assignment2_prog5/InteractivePiano/Content/blackKey.png","C:/Users/amina/Documents/assignment2_prog5/InteractivePiano/Content/bin/DesktopGL/Content/blackKey.xnb","TextureProcessor","Texture2DContent",4528,2986069,0,395073
+"C:/Users/amina/Documents/assignment2_prog5/InteractivePiano/Content/Letter.spritefont","C:/Users/amina/Documents/assignment2_prog5/InteractivePiano/Content/bin/DesktopGL/Content/Letter.xnb","FontDescriptionProcessor","SpriteFontContent",2068,70690,0,1385547
+"C:/Users/amina/Documents/assignment2_prog5/InteractivePiano/Content/whiteKey.png","C:/Users/amina/Documents/assignment2_prog5/InteractivePiano/Content/bin/DesktopGL/Content/whiteKey.xnb","TextureProcessor","Texture2DContent",1879,732533,0,052668
+"C:/Users/amina/Documents/assignment2_prog5/InteractivePiano/Content/whiteRectangle.png","C:/Users/amina/Documents/assignment2_prog5/InteractivePiano/Content/bin/DesktopGL/Content/whiteRectangle.xnb","TextureProcessor","Texture2DContent",10136,640057,0,0377981

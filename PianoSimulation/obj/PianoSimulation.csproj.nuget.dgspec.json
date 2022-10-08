@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\amina\\Documents\\CompSci\\Prog5\\assignment2_prog5\\PianoSimulation\\PianoSimulation.csproj": {}
+    "C:\\Users\\amina\\Documents\\assignment2_prog5\\PianoSimulation\\PianoSimulation.csproj": {}
   },
   "projects": {
-    "C:\\Users\\amina\\Documents\\CompSci\\Prog5\\assignment2_prog5\\PianoSimulation\\PianoSimulation.csproj": {
+    "C:\\Users\\amina\\Documents\\assignment2_prog5\\PianoSimulation\\PianoSimulation.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\amina\\Documents\\CompSci\\Prog5\\assignment2_prog5\\PianoSimulation\\PianoSimulation.csproj",
+        "projectUniqueName": "C:\\Users\\amina\\Documents\\assignment2_prog5\\PianoSimulation\\PianoSimulation.csproj",
         "projectName": "PianoSimulation",
-        "projectPath": "C:\\Users\\amina\\Documents\\CompSci\\Prog5\\assignment2_prog5\\PianoSimulation\\PianoSimulation.csproj",
+        "projectPath": "C:\\Users\\amina\\Documents\\assignment2_prog5\\PianoSimulation\\PianoSimulation.csproj",
         "packagesPath": "C:\\Users\\amina\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\amina\\Documents\\CompSci\\Prog5\\assignment2_prog5\\PianoSimulation\\obj\\",
+        "outputPath": "C:\\Users\\amina\\Documents\\assignment2_prog5\\PianoSimulation\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\amina\\AppData\\Roaming\\NuGet\\NuGet.Config"

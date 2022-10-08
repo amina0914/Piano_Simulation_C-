@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "C4qLI3SHHQwqgy0FUgQnDWFCs0NYIrvsHzbf9zRg4ZY6K3uRuNkNK0PavJcWXJ7acH3i/R2kFe9wbOkEvo4brQ==",
+  "dgSpecHash": "awtyzpbnO0DUk4miLd6x1T6adk576xhqfZs2M3uyk7z615UK3FfvUKxtcyJ1HBx8VWHCSNJ4FVBXfwDZahcSHA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\amina\\Documents\\CompSci\\Prog5\\assignment2_prog5\\InteractivePiano\\InteractivePiano.csproj",
+  "projectFilePath": "C:\\Users\\amina\\Documents\\assignment2_prog5\\InteractivePiano\\InteractivePiano.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\amina\\.nuget\\packages\\coverlet.collector\\1.2.0\\coverlet.collector.1.2.0.nupkg.sha512",
     "C:\\Users\\amina\\.nuget\\packages\\microsoft.codecoverage\\16.5.0\\microsoft.codecoverage.16.5.0.nupkg.sha512",

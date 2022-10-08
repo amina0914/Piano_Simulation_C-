@@ -18,3 +18,13 @@ C:\Users\amina\Documents\CompSci\Prog5\assignment2_prog5\PianoSimulation\obj\Deb
 C:\Users\amina\Documents\CompSci\Prog5\assignment2_prog5\PianoSimulation\obj\Debug\netcoreapp3.1\PianoSimulation.csproj.CoreCompileInputs.cache
 C:\Users\amina\Documents\CompSci\Prog5\assignment2_prog5\PianoSimulation\obj\Debug\netcoreapp3.1\PianoSimulation.dll
 C:\Users\amina\Documents\CompSci\Prog5\assignment2_prog5\PianoSimulation\obj\Debug\netcoreapp3.1\PianoSimulation.pdb
+C:\Users\amina\Documents\assignment2_prog5\PianoSimulation\bin\Debug\netcoreapp3.1\PianoSimulation.deps.json
+C:\Users\amina\Documents\assignment2_prog5\PianoSimulation\bin\Debug\netcoreapp3.1\PianoSimulation.dll
+C:\Users\amina\Documents\assignment2_prog5\PianoSimulation\bin\Debug\netcoreapp3.1\PianoSimulation.pdb
+C:\Users\amina\Documents\assignment2_prog5\PianoSimulation\obj\Debug\netcoreapp3.1\PianoSimulation.csproj.AssemblyReference.cache
+C:\Users\amina\Documents\assignment2_prog5\PianoSimulation\obj\Debug\netcoreapp3.1\PianoSimulation.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\amina\Documents\assignment2_prog5\PianoSimulation\obj\Debug\netcoreapp3.1\PianoSimulation.AssemblyInfoInputs.cache
+C:\Users\amina\Documents\assignment2_prog5\PianoSimulation\obj\Debug\netcoreapp3.1\PianoSimulation.AssemblyInfo.cs
+C:\Users\amina\Documents\assignment2_prog5\PianoSimulation\obj\Debug\netcoreapp3.1\PianoSimulation.csproj.CoreCompileInputs.cache
+C:\Users\amina\Documents\assignment2_prog5\PianoSimulation\obj\Debug\netcoreapp3.1\PianoSimulation.dll
+C:\Users\amina\Documents\assignment2_prog5\PianoSimulation\obj\Debug\netcoreapp3.1\PianoSimulation.pdb

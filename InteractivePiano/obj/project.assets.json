@@ -6465,11 +6465,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\amina\\Documents\\CompSci\\Prog5\\assignment2_prog5\\InteractivePiano\\InteractivePiano.csproj",
+      "projectUniqueName": "C:\\Users\\amina\\Documents\\assignment2_prog5\\InteractivePiano\\InteractivePiano.csproj",
       "projectName": "InteractivePiano",
-      "projectPath": "C:\\Users\\amina\\Documents\\CompSci\\Prog5\\assignment2_prog5\\InteractivePiano\\InteractivePiano.csproj",
+      "projectPath": "C:\\Users\\amina\\Documents\\assignment2_prog5\\InteractivePiano\\InteractivePiano.csproj",
       "packagesPath": "C:\\Users\\amina\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\amina\\Documents\\CompSci\\Prog5\\assignment2_prog5\\InteractivePiano\\obj\\",
+      "outputPath": "C:\\Users\\amina\\Documents\\assignment2_prog5\\InteractivePiano\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\amina\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -6484,11 +6484,11 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\amina\\Documents\\CompSci\\Prog5\\assignment2_prog5\\PianoSimulationTests\\PianoSimulationTests.csproj": {
-              "projectPath": "C:\\Users\\amina\\Documents\\CompSci\\Prog5\\assignment2_prog5\\PianoSimulationTests\\PianoSimulationTests.csproj"
+            "C:\\Users\\amina\\Documents\\assignment2_prog5\\PianoSimulationTests\\PianoSimulationTests.csproj": {
+              "projectPath": "C:\\Users\\amina\\Documents\\assignment2_prog5\\PianoSimulationTests\\PianoSimulationTests.csproj"
             },
-            "C:\\Users\\amina\\Documents\\CompSci\\Prog5\\assignment2_prog5\\PianoSimulation\\PianoSimulation.csproj": {
-              "projectPath": "C:\\Users\\amina\\Documents\\CompSci\\Prog5\\assignment2_prog5\\PianoSimulation\\PianoSimulation.csproj"
+            "C:\\Users\\amina\\Documents\\assignment2_prog5\\PianoSimulation\\PianoSimulation.csproj": {
+              "projectPath": "C:\\Users\\amina\\Documents\\assignment2_prog5\\PianoSimulation\\PianoSimulation.csproj"
             }
           }
         }

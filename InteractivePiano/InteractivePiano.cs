@@ -1,4 +1,10 @@
-﻿using Microsoft.Xna.Framework;
+﻿/**
+@author: Amina Turdalieva 
+@student id: 2035572
+@date: 08-10-2022
+@description: This is class extending Game. This class is responsible for displaying the piano and making the audio play.
+*/
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using PianoSimulation;
@@ -13,11 +19,10 @@ namespace InteractivePiano
     {
         private KeyboardState _currentKeyState;
         private KeyboardState _previousKeyState;
-        protected GraphicsDeviceManager graphics;
+        private GraphicsDeviceManager graphics;
         public SpriteBatch spriteBatch;
 
         public Texture2D texture;
-        // private Texture2D texture2;
 
         private List<KeysPiano> _whiteKeys;
 
@@ -114,7 +119,6 @@ namespace InteractivePiano
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             texture = Content.Load<Texture2D>("whiteRectangle");
-            // texture2 = Content.Load<Texture2D>("blackKey");
 
             _currentKeyState = Microsoft.Xna.Framework.Input.Keyboard.GetState();
             _previousKeyState = _currentKeyState;
@@ -150,21 +154,16 @@ namespace InteractivePiano
                         Console.WriteLine("letter " + _allKeys[index].letter);
                         _allKeys[index].isDown = true;
 
-
-                        //    Task t;
-                        // t = new Task(() => {
-                            Task.Run(()=>
-                            {
+                        Task.Run(()=>
+                        {
                             Audio.Reset();
                             _piano.StrikeKey(pianoKey); 
                             for (int j=0; j<_piano.SamplingRate*3; j++)
                             {
                                 _audio.Play(_piano.Play());
                             }
-                            });
+                        });
                 
-                        // t.Start();
-                        // t.Wait();
                     } 
                
                 }     
@@ -233,10 +232,3 @@ namespace InteractivePiano
 
 }
 
-
-//left to do:
-//error handling, if this key ...
-//check and correct certain keys like 2
-//correct code from assignment 1
-//go over, make it all safe, private where possible
-//make cords work

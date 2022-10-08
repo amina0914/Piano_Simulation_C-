@@ -454,4 +454,9 @@ $RECYCLE.BIN/
 !.vscode/extensions.json
 
 
-./Assignment1/PianoSimulationTests/coveragereport 
+./PianoSimulationTests/coveragereport 
+
+./InteractivePiano/bin/
+./PianoSimulationTests/obj/
+./PianoSimulation/obj/
+./InteractivePiano/obj/
