@@ -11,26 +11,26 @@ namespace InteractivePiano
 {
     public class InteractivePiano : Game
     {
-        KeyboardState currentKeyState;
-        KeyboardState previousKeyState;
-        public GraphicsDeviceManager graphics;
+        private KeyboardState _currentKeyState;
+        private KeyboardState _previousKeyState;
+        protected GraphicsDeviceManager graphics;
         public SpriteBatch spriteBatch;
 
         public Texture2D texture;
-        private Texture2D texture2;
+        // private Texture2D texture2;
 
-        List<KeysPiano> whiteKeys;
+        private List<KeysPiano> _whiteKeys;
 
-        List<KeysPiano> blackKeys;
-        Piano piano = new Piano();
+        private  List<KeysPiano> _blackKeys;
+        private Piano _piano = new Piano();
 
-        KeysPiano[] allKeys;
+        private KeysPiano[] _allKeys;
 
-        Audio audio;
+        private Audio _audio;
 
         public SpriteFont font;
 
-        String[] lettersAssociated;
+        private String[] _lettersAssociated;
 
 
         public InteractivePiano(Audio audio)
@@ -38,7 +38,7 @@ namespace InteractivePiano
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
-            this.audio=audio;
+            this._audio=audio;
 
         }
 
@@ -48,35 +48,35 @@ namespace InteractivePiano
             graphics.PreferredBackBufferHeight = 500;
             graphics.ApplyChanges();      
 
-                int whitePosX=0;
-                int whitePosY=0;
-                int whiteSizeX=70;
-                int whiteSizeY=220;
-                Color colorWhite=Color.White;
+            int whitePosX=0;
+            int whitePosY=0;
+            int whiteSizeX=70;
+            int whiteSizeY=220;
+            Color colorWhite=Color.White;
 
-                int blackPosX=50;
-                int blackPosY=0;
-                int blackSizeX=40;
-                int blackSizeY=120;
-                Color colorBlack=Color.Black;
+            int blackPosX=50;
+            int blackPosY=0;
+            int blackSizeX=40;
+            int blackSizeY=120;
+            Color colorBlack=Color.Black;
 
-            lettersAssociated = new String[piano.Keys.Length];
+            _lettersAssociated = new String[_piano.Keys.Length];
             String[] letters = {"A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"};
 
                 
-            for (int a=0; a<piano.Keys.Length; a++){
-                lettersAssociated[a] = letters[a%letters.Length];
+            for (int a=0; a<_piano.Keys.Length; a++){
+                _lettersAssociated[a] = letters[a%letters.Length];
             }
 
-            whiteKeys = new List<KeysPiano>();
+            _whiteKeys = new List<KeysPiano>();
             for (int i=0; i<22; i++)
             {
                 KeysPiano keysPiano = new KeysPiano(this, whitePosX, whitePosY, whiteSizeX, whiteSizeY, colorWhite);
-                whiteKeys.Add(keysPiano);
+                _whiteKeys.Add(keysPiano);
                 Components.Add(keysPiano);
                 whitePosX = whitePosX + 70;
             }
-            blackKeys = new List<KeysPiano>(); 
+            _blackKeys = new List<KeysPiano>(); 
             for (int j=0; j<15; j++)
             {
                 KeysPiano keysPiano = new KeysPiano(this, blackPosX, blackPosY, blackSizeX, blackSizeY, colorBlack);
@@ -89,21 +89,21 @@ namespace InteractivePiano
                 {
                     blackPosX = blackPosX + 70;
                 }
-                blackKeys.Add(keysPiano);
+                _blackKeys.Add(keysPiano);
             }    
-            allKeys = new KeysPiano[piano.Keys.Length];   
+            _allKeys = new KeysPiano[_piano.Keys.Length];   
             int indexBlack = 0 ;
             int indexWhite = 0;
-            for (int b=0; b<piano.Keys.Length; b++){
+            for (int b=0; b<_piano.Keys.Length; b++){
 
                 if(b%12==1 || b%12==4 || b%12==6 || b%12==9 || b%12==11)
                 {
-                    allKeys[b] = blackKeys[indexBlack];
+                    _allKeys[b] = _blackKeys[indexBlack];
                     indexBlack++;
                 }
                 else 
                 {
-                    allKeys[b] = whiteKeys[indexWhite];
+                    _allKeys[b] = _whiteKeys[indexWhite];
                     indexWhite++;
                 }
             }
@@ -114,10 +114,10 @@ namespace InteractivePiano
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             texture = Content.Load<Texture2D>("whiteRectangle");
-            texture2 = Content.Load<Texture2D>("blackKey");
+            // texture2 = Content.Load<Texture2D>("blackKey");
 
-            currentKeyState = Microsoft.Xna.Framework.Input.Keyboard.GetState();
-            previousKeyState = currentKeyState;
+            _currentKeyState = Microsoft.Xna.Framework.Input.Keyboard.GetState();
+            _previousKeyState = _currentKeyState;
             
             font = Content.Load<SpriteFont>("Letter");
 
@@ -125,14 +125,11 @@ namespace InteractivePiano
 
         protected override void Update(GameTime gameTime)
         {              
-            previousKeyState = currentKeyState;
-            currentKeyState = Microsoft.Xna.Framework.Input.Keyboard.GetState();
-
+            _previousKeyState = _currentKeyState;
+            _currentKeyState = Microsoft.Xna.Framework.Input.Keyboard.GetState();
 
             int index=0;
-            var pressedKeys = Keyboard.GetState().GetPressedKeys();
-
-   
+            var pressedKeys = Keyboard.GetState().GetPressedKeys(); 
             
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape)) 
             {
@@ -142,43 +139,46 @@ namespace InteractivePiano
                 foreach (Keys key in pressedKeys)
                 {
                    
-                    if (currentKeyState.IsKeyDown(key) && previousKeyState.IsKeyUp(key)){
+                    if (_currentKeyState.IsKeyDown(key) && _previousKeyState.IsKeyUp(key)){
 
                        
-                        
-                        char pianoKey = key.ToString().ToLower()[0];
-                        index = piano.Keys.IndexOf(pianoKey); 
-                        allKeys[index].letter = lettersAssociated[index];
-                        allKeys[index].isDown = true;
+                        Console.WriteLine("key obj " + key);
+                        char pianoKey = CheckKey(key);
+                        index = _piano.Keys.IndexOf(pianoKey); 
+                        Console.WriteLine("index in piano" + index);
+                        _allKeys[index].letter = _lettersAssociated[index];
+                        Console.WriteLine("letter " + _allKeys[index].letter);
+                        _allKeys[index].isDown = true;
 
 
-                        System.Diagnostics.Debug.WriteLine(pianoKey);
-                        Task t;
-                        t = new Task(() => {
-                            Audio.Reset();
-                            piano.StrikeKey(pianoKey); 
-                            for (int j=0; j<piano.SamplingRate*3; j++)
+                        //    Task t;
+                        // t = new Task(() => {
+                            Task.Run(()=>
                             {
-                                audio.Play(piano.Play());
+                            Audio.Reset();
+                            _piano.StrikeKey(pianoKey); 
+                            for (int j=0; j<_piano.SamplingRate*3; j++)
+                            {
+                                _audio.Play(_piano.Play());
                             }
                             });
-                        t.Start();
-                        t.Wait();
+                
+                        // t.Start();
+                        // t.Wait();
                     } 
                
                 }     
 
                 int index2;
-                for (int a=0; a<allKeys.Length; a++){
-                    allKeys[a].isDown=false;
+                for (int a=0; a<_allKeys.Length; a++){
+                    _allKeys[a].isDown=false;
                      for (int i=0; i<pressedKeys.Length; i++)
                     {
-                        char pianoKey = pressedKeys[i].ToString().ToLower()[0];
-                        index2 = piano.Keys.IndexOf(pianoKey); 
-                        allKeys[index2].isDown = true;
+                        char pianoKey = CheckKey(pressedKeys[i]);
+                        index2 = _piano.Keys.IndexOf(pianoKey); 
+                        _allKeys[index2].isDown = true;
 
-                    } 
-      
+                    }     
                 }   
             base.Update(gameTime);
         }
@@ -189,5 +189,54 @@ namespace InteractivePiano
 
             base.Draw(gameTime);
         }
+    
+
+        protected char CheckKey(Keys key){
+            char keyToStrike;
+            if (key == Keys.OemMinus){
+                keyToStrike='-';
+            } else if (key == Keys.OemOpenBrackets){
+                keyToStrike='[';
+            }else if (key == Keys.OemPlus){
+                keyToStrike='=';
+            }else if (key == Keys.OemComma){
+                keyToStrike=',';
+            }else if (key == Keys.OemPeriod){
+                keyToStrike='.';
+            }else if (key == Keys.OemSemicolon){
+                keyToStrike=';';
+            }else if (key == Keys.OemQuestion){
+                keyToStrike='/';
+            }else if (key == Keys.OemQuotes){
+                keyToStrike='\'';
+            }else if (key == Keys.Space){
+                keyToStrike=' ';
+            }else if (key == Keys.D2){
+                keyToStrike='2';
+            }else if (key == Keys.D4){
+                keyToStrike='4';
+            }else if (key == Keys.D5){
+                keyToStrike='5';
+            }else if (key == Keys.D7){
+                keyToStrike='7';
+            }else if (key == Keys.D8){
+                keyToStrike='8';
+            }else if (key == Keys.D9){
+                keyToStrike='9';
+            } else {
+                keyToStrike = key.ToString().ToLower()[0];;
+            }
+            return keyToStrike;
+        }
+
     }
+
 }
+
+
+//left to do:
+//error handling, if this key ...
+//check and correct certain keys like 2
+//correct code from assignment 1
+//go over, make it all safe, private where possible
+//make cords work

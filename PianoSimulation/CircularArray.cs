@@ -47,7 +47,9 @@ namespace PianoSimulation
 
         public void Fill(double[] array)
         {
-            _buffer = array;
+            for (int i=0; i<array.Length; i++){
+                _buffer[i]=array[i];
+            }
         }
 
     }

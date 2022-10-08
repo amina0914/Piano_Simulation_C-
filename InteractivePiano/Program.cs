@@ -12,7 +12,7 @@ namespace InteractivePiano
             {        
                 using (var game = new InteractivePiano(audio))
                     game.Run();
-                }
+            }
         }
     }
 }

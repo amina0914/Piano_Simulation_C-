@@ -50,9 +50,10 @@ namespace InteractivePiano
                 lock(_lockObjectConstruction) 
                 {
                     instance = new Audio();
+                return instance;
+                    
                 }
                 // instance.Reset(); // * not sure when to call reset
-                return instance;
             }
         }
 
