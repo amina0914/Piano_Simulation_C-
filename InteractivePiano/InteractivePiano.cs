@@ -68,11 +68,12 @@ namespace InteractivePiano
             _lettersAssociated = new String[_piano.Keys.Length];
             String[] letters = {"A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"};
 
-                
+            // The following creates a list of 37 letters, so each key will be associated to a letter
             for (int a=0; a<_piano.Keys.Length; a++){
                 _lettersAssociated[a] = letters[a%letters.Length];
             }
 
+            // The following code creates and draws all the white keys
             _whiteKeys = new List<KeysPiano>();
             for (int i=0; i<22; i++)
             {
@@ -81,6 +82,8 @@ namespace InteractivePiano
                 Components.Add(keysPiano);
                 whitePosX = whitePosX + 70;
             }
+
+            // The following code creates and draws all the black keys
             _blackKeys = new List<KeysPiano>(); 
             for (int j=0; j<15; j++)
             {
@@ -96,6 +99,7 @@ namespace InteractivePiano
                 }
                 _blackKeys.Add(keysPiano);
             }    
+            // The following code creates a list of all the keys (black and white) re-ordered (following the order of the piano keys, q2w...)
             _allKeys = new KeysPiano[_piano.Keys.Length];   
             int indexBlack = 0 ;
             int indexWhite = 0;
@@ -168,6 +172,7 @@ namespace InteractivePiano
                
                 }     
 
+                // The following code makes the keys all their appropriate color, when a key is pressed, it changed the color to gray
                 int index2;
                 for (int a=0; a<_allKeys.Length; a++){
                     _allKeys[a].isDown=false;
@@ -190,6 +195,7 @@ namespace InteractivePiano
         }
     
 
+        // This method is mapping the key that was pressed to the keys in the piano
         protected char CheckKey(Keys key){
             char keyToStrike;
             if (key == Keys.OemMinus){
