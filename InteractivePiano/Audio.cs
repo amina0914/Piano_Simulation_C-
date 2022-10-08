@@ -43,6 +43,7 @@ namespace InteractivePiano
             _waveOut.Play();
         }
 
+        // This is the constructor of Audio singleton
         public static Audio Instance
         {
             get 
